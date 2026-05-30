@@ -1,0 +1,7 @@
+#!/bin/bash
+#$1 == filename
+#$2 == output
+rm -rf ebbsnes.smc
+wla/wla-65816 -o ebbsnes.o src/main.asm
+wla/wlalink -S -r link.txt ebbsnes.smc
+rm -rf ebbsnes.o

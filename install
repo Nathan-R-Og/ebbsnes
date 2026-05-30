@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#$1 == cpu
+#$2 == syntax
+
+# Debian and derivatives (apt)
+if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; then
+    echo "Installing packages for Debian or derivative (apt)"
+    sudo apt install cmake
+
+    #get wla
+    rm -rf wla
+    git clone https://github.com/vhelin/wla-dx # Clone the repository
+    cd wla-dx
+    mkdir build && cd build # Create building directory
+    cmake .. # Generate build system
+    cmake --build . --config Release # Build it
+    cd ../..
+
+    #move the things we need
+    mkdir wla
+    mv wla-dx/build/binaries/wla-65816 wla/wla-65816
+    mv wla-dx/build/binaries/wla-spc700 wla/wla-spc700
+    mv wla-dx/build/binaries/wla-superfx wla/wla-superfx
+    mv wla-dx/build/binaries/wlab wla/wlab
+    mv wla-dx/build/binaries/wlalink wla/wlalink
+
+    #bye bye
+    rm -rf wla-dx
+
+fi
