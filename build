@@ -1,7 +1,12 @@
 #!/bin/bash
 #$1 == filename
 #$2 == output
+echo Cleaning old output...
 rm -rf ebbsnes.smc
-wla/wla-65816 -o ebbsnes.o src/main.asm
+echo Compiling ASM...
+wla/wla-65816 -o bank0.o src/banks/bank0.asm
+wla/wla-65816 -o bank1.o src/banks/bank1.asm
+echo Linking...
 wla/wlalink -S -r link.txt ebbsnes.smc
-rm -rf ebbsnes.o
+echo Deleting intermediate build outputs...
+rm -rf *.o

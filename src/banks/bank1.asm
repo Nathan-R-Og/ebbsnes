@@ -1,3 +1,7 @@
+.include "include/hardware.asm"
+.include "include/enums.asm"
+.include "include/macros.asm"
+
 .BANK 1
 .ORG $0000
 
@@ -27,6 +31,8 @@
 .EQU ReadPads pad.w
 .EQU IncrementFramecounter pad.w
 
+.ACCU 8
+.INDEX 16
 
 ;Darken Transition
 OT0_DefaultTransition:

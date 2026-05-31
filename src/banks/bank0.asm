@@ -1,3 +1,8 @@
+.include "include/hardware.asm"
+.include "include/enums.asm"
+.include "include/macros.asm"
+.include "include/ram.asm"
+
 .BANK 0
 .ORG $0000
 
