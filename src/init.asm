@@ -6,6 +6,12 @@ xce
 ;stop interrupts
 sei
 
+; begin executing from correct bank
+; at reset, bank will always be $00 but we want to run from $80 in case we
+; want to use fastrom someday
+jml _reset_long
+_reset_long:
+
 sep #FLAG_ACCUM16
 
 lda #%10001111
