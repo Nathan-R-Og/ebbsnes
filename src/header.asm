@@ -2,26 +2,26 @@
 
 .SNESHEADER
 ID "SNES"
-NAME "EPIC FUCKING TEST    "  ; Program Title - can't be over 21 bytes,
+NAME "EARTHBOUND BEGINNINGS"  ; Program Title - can't be over 21 bytes,
 
 ;.db $23
 SLOWROM
 LOROM
 
-;ROM
-CARTRIDGETYPE 0
+;ROM + SRAM
+CARTRIDGETYPE $02
 
 ;ROM size: 1<<N kilobytes, rounded up (so 8=256KB, 12=4096KB and so on)
-ROMSIZE 2 ; 4096KB
+ROMSIZE 10 ; 1MB should be enough
 
 ;RAM size: 1<<N kilobytes (so 1=2KB, 5=32KB, and so on)
-SRAMSIZE 0 ; 8KB sram
+SRAMSIZE 3 ; 8KB sram (just like the original)
 
 ; $01 = U.S.
 COUNTRY 1
 
 ;developer id
-LICENSEECODE $69
+LICENSEECODE $69 ; nice
 
 ;rom version (first)
 VERSION 0
@@ -44,7 +44,7 @@ IRQ 0
 COP 0
 ;blank
 ABORT 0
-NMI nmi
-RESET MyProg                     ; where execution starts
+NMI 0
+RESET reset                     ; where execution starts
 IRQBRK 0
 .ENDEMUVECTOR

@@ -1,14 +1,25 @@
 .MEMORYMAP                      ; Begin describing the system architecture.
-SLOTSIZE $8000                ; The slot is $8000 bytes in size. More details on slots later.
 DEFAULTSLOT 0
-DEFAULTRAMSECTIONSLOT 1
-SLOT 0 $8000                  ; Defines Slot 0's starting address.
-SLOTSIZE $2000
-SLOT 1 $0000 ;ram
+SLOT 0 START $8000 SIZE $08000 ; ROM
+; TODO: Is there a way to specify the bank here? Currently it seems as if it
+; thinks these are all in bank $00...
+; In ebbsnes.sym we have:
+;   00:0000 RAM_USAGE_SLOT_1_BANK_0_START
+;   00:083f RAM_USAGE_SLOT_1_BANK_0_END
+;   00:2000 RAM_USAGE_SLOT_2_BANK_0_START
+;   00:2001 RAM_USAGE_SLOT_2_BANK_0_END
+;   00:0000 RAM_USAGE_SLOT_3_BANK_0_START
+;   00:0001 RAM_USAGE_SLOT_3_BANK_0_END
+SLOT 1 START $0000 SIZE $02000 ; RAM: low RAM, mirrored in each bank
+SLOT 2 START $2000 SIZE $0A000 ; RAM: Rest of bank $7E
+SLOT 3 START $0000 SIZE $10000 ; RAM: Bank $7F
 .ENDME          ; End MemoryMap definition
 
 .ROMBANKSIZE $8000              ; Every ROM bank is 32 KBytes in size
-.ROMBANKS 2                     ; 2 Mbits - Tell WLA we want to use 8 ROM Banks
+.ROMBANKS 32                    ; 32 x 32KB ==> 1MB of ROM
+
+; Have all long pointers point to FastROM mirrors
+.BASE $80
 
 ;joypad bits
 ;l
