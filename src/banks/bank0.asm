@@ -18,19 +18,26 @@
 
 .include "src/header.asm"
 
-MyProg:
+reset:
     .include "src/init.asm"
+    sep #$30
 
-	lda #%10000001 ;joypad autoread
+    lda #%10000001 ;joypad autoread
     sta NMITIMEN
 
     ;bgmode == 0
     lda #%00001000
     sta BGMODE
 
-    rep #%00010000
-    .index 16 ;xy 16 bit
+    ; Test that far memory (banks $7e, $7f) are working correctly
+    rep #$20
+    lda #$aabb
+    sta.l test_7e
+    ina
+    sta.l test_7f
 
+    sep #$20
+    rep #$10
 
     ; ldx #2
     ; @jump1:

@@ -1,4 +1,4 @@
-.RAMSECTION "RAM"
+.RAMSECTION "RAM" SLOT 1
 z_L: ds 3 ;0-2
 CursorX: ds 1 ;3
 CursorY: ds 1 ;4
@@ -50,4 +50,10 @@ palette_queue: ds $20 ;$600 / palette queue
 palette_backup: ds $20 ;$620 / palette queue backup
 OBJECTS: ds $100 ; $640
 text_data_buffer: ds $100 ; $740
+.ENDS
+.RAMSECTION "RAM7E" BASE $7E SLOT 2
+test_7e: ds 2
+.ENDS
+.RAMSECTION "RAM7F" BASE $7F SLOT 3
+test_7f: ds 2
 .ENDS
